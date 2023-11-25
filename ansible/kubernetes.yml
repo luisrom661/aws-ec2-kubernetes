@@ -1,0 +1,39 @@
+- hosts: ubuntu-master, ubuntu-worker
+  become: yes
+  tasks:
+    - name: Actualizar los paquetes del sistema
+      apt:
+        update_cache: yes
+
+    - name: Instalar curl
+      apt:
+        name: curl
+        state: present
+
+    - name: Obtener la versión más reciente de kubectl
+      command: curl -L -s https://dl.k8s.io/release/stable.txt
+      register: kubectl_version
+
+    - name: Descargar kubectl
+      get_url:
+        url: "https://dl.k8s.io/release/{{ kubectl_version.stdout }}/bin/linux/amd64/kubectl"
+        dest: "/tmp/kubectl"
+        mode: '0755'
+
+    - name: Instalar kubectl
+      copy:
+        src: "/tmp/kubectl"
+        dest: "/usr/local/bin/kubectl"
+        owner: root
+        group: root
+        mode: '0755'
+        remote_src: yes
+
+    - name: Verificar la versión de kubectl
+      command: kubectl version --client
+      register: version
+      changed_when: false
+
+    - name: Mostrar la versión de kubectl
+      debug:
+        var: version.stdout_lines

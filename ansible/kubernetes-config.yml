@@ -1,0 +1,27 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Agregar la clave GPG de Google Cloud
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+
+    - name: Agregar el repositorio de Kubernetes
+      apt_repository:
+        repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+        state: present
+
+    - name: Actualizar los paquetes del sistema
+      apt:
+        update_cache: yes
+
+    - name: Instalar kubelet, kubeadm y kubectl
+      apt:
+        name:
+          - kubelet
+          - kubeadm
+          - kubectl
+        state: present
+    
+    - name: Instalar kube-apiserver
+      command: snap install kube-apiserver
