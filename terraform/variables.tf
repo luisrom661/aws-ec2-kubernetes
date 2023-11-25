@@ -20,7 +20,7 @@ variable "aws_ami" {
 
 variable "aws_instance_type" {
   description = "AWS instance type"
-  default     = "t2.micro" # Cambiar a la instancia que desees
+  default     = "t2.large" # Cambiar a la instancia que desees
 }
 
 variable "aws_key_name" {
@@ -45,7 +45,11 @@ variable "ingress_rules" {
     sonarqube = {
       from_port = 9000
       to_port   = 9000
-    }
+    },
+    kubernetes = {
+      from_port = 6443
+      to_port   = 6443
+    },
   }
 }
 

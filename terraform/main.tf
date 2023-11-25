@@ -65,7 +65,7 @@ resource "aws_instance" "k8s-master-instance" {
   }
 
   provisioner "remote-exec" {
-    inline = [ "echo 'EC2 Instance is Ready!.'" ]
+    inline = [ "echo 'EC2 Instance K8s Master is Ready!.'" ]
   }
 
   connection {
@@ -96,7 +96,7 @@ resource "aws_instance" "k8s-worker-instance" {
   }
 
   provisioner "remote-exec" {
-    inline = [ "echo 'EC2 Instance is Ready!.'" ]
+    inline = [ "echo 'EC2 Instance K8s Worker is Ready!.'" ]
   }
 
   connection {
