@@ -17,3 +17,13 @@ output "instance_public_ip-worker" {
   description = "Public IP address of the EC2 instance"
   value       = aws_instance.k8s-worker-instance.public_ip
 }
+
+output "instance_public_dns-master" {
+  description = "Public DNS name of the EC2 instance"
+  value       = aws_instance.k8s-master-instance.public_dns
+}
+
+output "instance_public_dns-worker" {
+  description = "Public DNS name of the EC2 instance"
+  value       = aws_instance.k8s-worker-instance.public_dns
+}
