@@ -7,8 +7,8 @@ resource "tls_private_key" "rsa-4096" {
 }
 
 # Create a security group
-resource "aws_security_group" "sg_ec2" {
-  name        = "sg_ec2"
+resource "aws_security_group" "sg_ec2_k8s" {
+  name        = "sg_ec2_k8s"
   description = "Security group for allow SSH and HTTP in EC2"
 
   dynamic "ingress" {
@@ -50,7 +50,7 @@ resource "aws_instance" "k8s-master-instance" {
   ami                    = var.aws_ami # ID de la imagen de Ubuntu 22.04
   instance_type          = var.aws_instance_type
   key_name               = aws_key_pair.key_pair.key_name # Cambia esto por el nombre de tu par de claves
-  vpc_security_group_ids = [aws_security_group.sg_ec2.id] # Cambia esto por el ID de tu grupo de seguridad
+  vpc_security_group_ids = [aws_security_group.sg_ec2_k8s.id] # Cambia esto por el ID de tu grupo de seguridad
   tags = {
     Name = "k8s-master-instance"
   }
@@ -81,7 +81,7 @@ resource "aws_instance" "k8s-worker-instance" {
   ami                    = var.aws_ami # ID de la imagen de Ubuntu 22.04
   instance_type          = var.aws_instance_type
   key_name               = aws_key_pair.key_pair.key_name # Cambia esto por el nombre de tu par de claves
-  vpc_security_group_ids = [aws_security_group.sg_ec2.id] # Cambia esto por el ID de tu grupo de seguridad
+  vpc_security_group_ids = [aws_security_group.sg_ec2_k8s.id] # Cambia esto por el ID de tu grupo de seguridad
   tags = {
     Name = "k8s-worker-instance"
   }
