@@ -25,7 +25,9 @@
 
     - name: Instalar Snap
       apt:
-        name: snapd
+        name: 
+          - snapd
+        state: present
     
     - name: Instalar kube-apiserver
       command: snap install kube-apiserver
