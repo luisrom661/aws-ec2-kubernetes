@@ -22,6 +22,10 @@
           - kubeadm
           - kubectl
         state: present
+
+    - name: Instalar Snap
+      apt:
+        name: snapd
     
     - name: Instalar kube-apiserver
       command: snap install kube-apiserver
