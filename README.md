@@ -1,5 +1,7 @@
 # Proyecto de Infraestructura con Terraform, AWS, Kubernetes y Ansible
 
+![devsecops](/img/configuración_para_terraform_para_aws_ec2.jpg)
+
 Este proyecto utiliza Terraform para crear la infraestructura necesaria para dos instancias EC2 en AWS. Una instancia actúa como el nodo maestro de Kubernetes y la otra como el nodo trabajador. Además, se utiliza Ansible para instalar Docker y Kubernetes en ambas máquinas.
 
 ## Requisitos
